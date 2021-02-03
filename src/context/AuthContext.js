@@ -39,6 +39,8 @@ export const AuthProvider = ({ children }) => {
     lastName: "",
     username: "",
     email: "",
+    password: "",
+    confirmPassword: "",
     errors: {},
     loading: false,
   });

@@ -8,14 +8,14 @@ import Profile from "./components/Profile";
 
 import { AuthProvider } from "./context/AuthContext";
 import AuthRoute from "./util/AuthRoute";
-import "./app.css";
+import "./App.css";
 
 const token = localStorage.FBIdToken;
 let authenticated;
 
 if (token) {
   const decodedToken = jwtDecode(token);
-
+  console.log(decodedToken.exp);
   // Check if token is expired
   if (decodedToken.exp * 1000 < Date.now()) {
     window.location.href("/");

@@ -18,8 +18,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "test": "react-scripts test",
-    "build": "react-scripts build",
+    "test": "jest",
+    "build": "webpack src/app.js -o public/bundle.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

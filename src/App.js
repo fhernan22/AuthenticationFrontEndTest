@@ -13,6 +13,7 @@ import "./App.css";
 const token = localStorage.FBIdToken;
 let authenticated;
 
+// Testing
 if (token) {
   const decodedToken = jwtDecode(token);
   console.log(decodedToken.exp);

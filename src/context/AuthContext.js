@@ -28,7 +28,7 @@ const AuthReducer = (state, action) => {
     }
 
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      throw new Error(`Unhandled action Type: ${action.type}`);
     }
   }
 };

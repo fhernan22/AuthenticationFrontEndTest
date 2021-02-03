@@ -1,17 +1,18 @@
-name: Node Continuous Integration
+name: Continuous Integration
 
 on:
   pull_request:
     branches: [main]
 
 jobs:
-  test_pull_request:
+  buildAndTest:
+    name: Build and Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
+      - name: Install Dependencies
+        run: yarn
+      - name: Build
+        run: yarn build
+      - name: Test
+        run: yarn test --watchAll=false

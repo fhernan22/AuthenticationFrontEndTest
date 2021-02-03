@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
+
+import { AuthProvider } from "./context/AuthContext";
+import AuthRoute from "./util/AuthRoute";
+import "./app.css";
+
+const token = localStorage.FBIdToken;
+let authenticated;
+
+if (token) {
+  const decodedToken = jwtDecode(token);
+
+  // Check if token is expired
+  if (decodedToken.exp * 1000 < Date.now()) {
+    window.location.href("/");
+    authenticated = false;
+  } else {
+    authenticated = true;
+  }
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <div className="container">
+          <Router>
+            <Navbar />
+            <Switch>
+              <AuthRoute
+                exact
+                path="/"
+                component={Home}
+                authenticated={authenticated}
+              />
+              <AuthRoute
+                exact
+                path="/profile"
+                component={Profile}
+                authenticated={authenticated}
+              />
+            </Switch>
+          </Router>
+        </div>
+      </div>
+    </AuthProvider>
   );
 }
 

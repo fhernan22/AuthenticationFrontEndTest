@@ -10,6 +10,7 @@ import { AuthProvider } from "./context/AuthContext";
 import AuthRoute from "./util/AuthRoute";
 import "./App.css";
 
+// Token
 const token = localStorage.FBIdToken;
 let authenticated;
 
